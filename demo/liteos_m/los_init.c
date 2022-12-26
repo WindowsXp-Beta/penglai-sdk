@@ -48,11 +48,6 @@ UINT32 LOS_KernelInit(VOID)
         return ret;
     }
 
-    char * ptr = LOS_MemAlloc(m_aucSysMem0, 100);
-    PRINTK("allocated mem is %p\n", ptr);
-    *ptr = 0;
-    LOS_MemFree(m_aucSysMem0, ptr);
-
     // HalArchInit();
 
     // ret = OsTaskInit();
