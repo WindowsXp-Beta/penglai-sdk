@@ -1,5 +1,33 @@
 #include "los_compiler.h"
+#include "los_task.h"
+#include "los_memory.h"
+#include "los_context.h"
+#include "target_config.h"
 #include "print.h"
+
+/*****************************************************************************
+ Function    : OsRegister
+ Description : Configuring the maximum number of tasks
+ Input       : None
+ Output      : None
+ Return      : None
+ *****************************************************************************/
+LITE_OS_SEC_TEXT_INIT static VOID OsRegister(VOID)
+{
+    // TODO(zhidong): remove comment after los_task.c is ported
+    // g_taskMaxNum = LOSCFG_BASE_CORE_TSK_LIMIT + 1; /* Reserved 1 for IDLE */
+
+    return;
+}
+
+LITE_OS_SEC_TEXT_INIT VOID LOS_Panic(const CHAR *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    PRINT_ERR(fmt, ap);
+    va_end(ap);
+    HalSysExit();
+}
 
 /*****************************************************************************
  Function    : LOS_KernelInit
@@ -12,11 +40,6 @@ UINT32 LOS_KernelInit(VOID)
 {
     UINT32 ret;
     PRINTK("entering kernel init...\n");
-    return LOS_OK;
-#if 0
-#if (LOSCFG_BACKTRACE_TYPE != 0)
-    OSBackTraceInit();
-#endif
 
     OsRegister();
     ret = OsMemSystemInit();
@@ -25,96 +48,23 @@ UINT32 LOS_KernelInit(VOID)
         return ret;
     }
 
-    HalArchInit();
+    char * ptr = LOS_MemAlloc(m_aucSysMem0, 100);
+    PRINTK("allocated mem is %p\n", ptr);
+    *ptr = 0;
+    LOS_MemFree(m_aucSysMem0, ptr);
 
-    ret = OsTaskInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("OsTaskInit error\n");
-        return ret;
-    }
+    // HalArchInit();
 
-#if (LOSCFG_BASE_CORE_TSK_MONITOR == 1)
-    OsTaskMonInit();
-#endif
+    // ret = OsTaskInit();
+    // if (ret != LOS_OK) {
+    //     PRINT_ERR("OsTaskInit error\n");
+    //     return ret;
+    // }
 
-#if (LOSCFG_BASE_CORE_CPUP == 1)
-    ret = OsCpupInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("OsCpupInit error\n");
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_BASE_IPC_SEM == 1)
-    ret = OsSemInit();
-    if (ret != LOS_OK) {
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_BASE_IPC_MUX == 1)
-    ret = OsMuxInit();
-    if (ret != LOS_OK) {
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_BASE_IPC_QUEUE == 1)
-    ret = OsQueueInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("OsQueueInit error\n");
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_BASE_CORE_SWTMR == 1)
-    ret = OsSwtmrInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("OsSwtmrInit error\n");
-        return ret;
-    }
-#endif
-
-    ret = OsIdleTaskCreate();
-    if (ret != LOS_OK) {
-        return ret;
-    }
-
-#if (LOSCFG_KERNEL_TRACE == 1)
-    ret = OsTraceInit(LOSCFG_TRACE_BUFFER_SIZE);
-    if (ret != LOS_OK) {
-        PRINT_ERR("OsTraceInit error\n");
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_KERNEL_PM == 1)
-    ret = OsPmInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("Pm init failed!\n");
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_TEST == 1)
-    ret = los_TestInit();
-    if (ret != LOS_OK) {
-        PRINT_ERR("los_TestInit error\n");
-        return ret;
-    }
-#endif
-
-#if (LOSCFG_PLATFORM_EXC == 1)
-    OsExcMsgDumpInit();
-#endif
-
-#if (LOSCFG_DYNLINK == 1)
-    ret = LOS_DynlinkInit();
-    if (ret != LOS_OK) {
-        return ret;
-    }
-#endif
+    // ret = OsIdleTaskCreate();
+    // if (ret != LOS_OK) {
+    //     return ret;
+    // }
 
     return LOS_OK;
-#endif
 }

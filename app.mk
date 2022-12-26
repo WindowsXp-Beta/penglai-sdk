@@ -15,6 +15,7 @@ LDFLAGS = -static -L$(SDK_LIB_DIR) -L$(MUSL_LIB_DIR) -lpenglai-enclave-eapp -lc
 CFLAGS += -I$(SDK_INCLUDE_DIR)
 
 APP_C_OBJS = $(patsubst %.c,%.o, $(APP_C_SRCS))
+APP_S_OBJS = $(patsubst %.S,%.o, $(APP_S_SRCS))
 APP_A_OBJS = $(patsubst %.s,%.o, $(APP_A_SRCS))
 APP_LDS ?= $(PENGLAI_SDK)/app.lds
 
@@ -26,7 +27,11 @@ $(APP_C_OBJS): %.o: %.c
 	echo $(PENGLAI_SDK)
 	$(CC) $(CFLAGS) -c $<
 
-$(APP_BIN): % : $(APP_C_OBJS) $(APP_A_OBJS) $(SDK_APP_LIB) $(MUSL_LIBC) $(GCC_LIB)
+$(APP_S_OBJS): %.o: %.S
+	echo $(PENGLAI_SDK)
+	$(CC) $(CFLAGS) -c $<
+
+$(APP_BIN): % : $(APP_C_OBJS) $(APP_A_OBJS) $(APP_S_OBJS) $(SDK_APP_LIB) $(MUSL_LIBC) $(GCC_LIB)
 	$(LINK) $(LDFLAGS) -o $@ $^ -T $(APP_LDS)
 	chmod -x $@
 
