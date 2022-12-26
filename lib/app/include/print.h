@@ -4,5 +4,5 @@
 #include <stdarg.h>
 
 void eapp_print(const char* s, ...);
-
+#define PRINTK(fmt, args...)         eapp_print(fmt, ##args)
 #endif
