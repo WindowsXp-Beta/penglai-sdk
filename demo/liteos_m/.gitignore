@@ -2,4 +2,3 @@ liteos_m
 host
 *.dump
 *.o
-*.S
