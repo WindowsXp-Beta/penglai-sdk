@@ -48,7 +48,7 @@ UINT32 LOS_KernelInit(VOID)
         return ret;
     }
 
-    // HalArchInit();
+    HalArchInit();
 
     // ret = OsTaskInit();
     // if (ret != LOS_OK) {

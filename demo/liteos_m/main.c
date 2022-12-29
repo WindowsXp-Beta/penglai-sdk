@@ -33,9 +33,10 @@ INT32 LiteOS_main(VOID)
 {
     UINT32 ret;
 
-    printf("\n OHOS start \n\r");
+    eapp_print("\n OHOS start \n\r");
 
     ret = LOS_KernelInit();
+
     EAPP_RETURN(ret);
 //     if (ret != LOS_OK) {
 //         printf("Liteos kernel init failed! ERROR: 0x%x\n", ret);
@@ -55,8 +56,8 @@ INT32 LiteOS_main(VOID)
 //     }
 }
 
-int EAPP_ENTRY main(){
-  unsigned long * args;
-  EAPP_RESERVE_REG;
-  LiteOS_main();
-}
+// int EAPP_ENTRY main(){
+//   unsigned long * args;
+//   EAPP_RESERVE_REG;
+//   LiteOS_main();
+// }
