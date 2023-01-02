@@ -163,7 +163,7 @@ HalTrapEntry:
     ld    t0, 17 * REGBYTES(sp)
     csrw  sepc, t0
     POP_ALL_REG
-    mret
+    sret
 
 
 // .section .interrupt.HalTrapVector.text

@@ -38,6 +38,8 @@
 #include "print.h"
 // #include "los_sched.h
 // #include "riscv_hal.h"
+#include "riscv_asm.h"
+#include "riscv_encoding.h"
 
 
 LosExcInfo g_excInfo;
@@ -118,11 +120,20 @@ __attribute__((section(".interrupt.text"))) VOID HalHwiInterruptDone(HWI_HANDLE_
 
     // OsHookCall(LOS_HOOK_TYPE_ISR_ENTER, hwiNum);
 
+#if 0
     HWI_HANDLE_FORM_S *hwiForm = &g_hwiForm[hwiNum];
     HwiProcFunc func = (HwiProcFunc)(hwiForm->pfnHook);
     func(hwiForm->uwParam);
 
     ++g_hwiFormCnt[hwiNum];
+#endif
+	eapp_print("\n Interrupt Triggerd \n\r");
+	csr_clear(CSR_SIP, SIP_STIP);
+	/*
+	 * Note(DD): uncomment the following line to enable multiple
+	 * 			 timer interrupts
+	 * */
+	//EAPP_SET_TIMER(100000);
 
     // OsHookCall(LOS_HOOK_TYPE_ISR_EXIT, hwiNum);
 

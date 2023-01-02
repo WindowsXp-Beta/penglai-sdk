@@ -1,6 +1,8 @@
 #include "eapp.h"
 #include "print.h"
 #include "los_compiler.h"
+#include "riscv_asm.h"
+#include "riscv_encoding.h"
 
 int prime_loop(int num)
 {
@@ -36,6 +38,12 @@ INT32 LiteOS_main(VOID)
     eapp_print("\n OHOS start \n\r");
 
     ret = LOS_KernelInit();
+
+	csr_set(CSR_SIE, SIP_STIP);
+	EAPP_SET_TIMER(100000);
+
+	volatile int dummy_count =1000000;
+	while (dummy_count) {dummy_count--;}
 
     EAPP_RETURN(ret);
 //     if (ret != LOS_OK) {
