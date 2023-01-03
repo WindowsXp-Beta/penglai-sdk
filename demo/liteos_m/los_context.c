@@ -1,17 +1,17 @@
 #include "los_arch_interrupt.h"
 #include "los_context.h"
+#include "print.h"
 
 LITE_OS_SEC_TEXT_INIT VOID HalArchInit(VOID)
 {
-    // UINT32 ret;
+    UINT32 ret;
     HalHwiInit();
 
-    // TODO(cyx): Enable timer.
-    // ret = HalTickStart(OsTickHandler);
-    // if (ret != LOS_OK) {
-    //     PRINT_ERR("Tick start failed!\n");
-    //     return;
-    // }
+    ret = HalTickStart();
+    if (ret != LOS_OK) {
+        PRINT_ERR("Tick start failed!\n");
+        return;
+    }
 }
 
 /* ****************************************************************************

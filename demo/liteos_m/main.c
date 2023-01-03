@@ -4,26 +4,6 @@
 #include "riscv_asm.h"
 #include "riscv_encoding.h"
 
-int prime_loop(int num)
-{
-  unsigned long count;
-  int i;
-  for(i = 2; i < num; i++)
-  {
-    if (num % i ==0)
-      count++;
-  }
-  return count;
-}
-
-int prime(unsigned long * args)
-{
-  eapp_print("%s is running\n", "Prime");
-  unsigned long ret;
-  ret = prime_loop(111);
-  EAPP_RETURN(ret);
-}
-
 /*****************************************************************************
  Function    : main
  Description : Main function entry
@@ -39,11 +19,8 @@ INT32 LiteOS_main(VOID)
 
     ret = LOS_KernelInit();
 
-	csr_set(CSR_SIE, SIP_STIP);
-	EAPP_SET_TIMER(100000);
-
-	volatile int dummy_count =1000000;
-	while (dummy_count) {dummy_count--;}
+	  volatile int dummy_count = 1000;
+	  while (dummy_count) {dummy_count--;}
 
     EAPP_RETURN(ret);
 //     if (ret != LOS_OK) {
@@ -63,9 +40,3 @@ INT32 LiteOS_main(VOID)
 //         __asm volatile("wfi");
 //     }
 }
-
-// int EAPP_ENTRY main(){
-//   unsigned long * args;
-//   EAPP_RESERVE_REG;
-//   LiteOS_main();
-// }
