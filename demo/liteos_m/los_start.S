@@ -63,10 +63,6 @@ main:
 
     li    t0, RISCV_SSTATUS_SIE
     csrw  sstatus, t0
-    li    t0, RISCV_SIE_STIE
-    csrw  sie, t0
-    li    t0, RISCV_SIP_STIP
-    csrw  sip, t0
     la    t0, HalTrapVector
     csrw  stvec, t0      # direct mode
 

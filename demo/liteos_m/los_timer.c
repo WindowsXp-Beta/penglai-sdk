@@ -38,14 +38,19 @@
 #include "print.h"
 
 #ifndef TICK_CYCLE
-#define TICK_CYCLE 100000000000
+#define TICK_CYCLE 1000000000
 #endif
 
 void HandleTimerIRQ()
 {
     eapp_print("\n Timer IRQ! \n\r");
     csr_clear(CSR_SIP, SIP_STIP);
-    EAPP_SET_TIMER(TICK_CYCLE);
+
+    /*
+	 * Note(DD): uncomment the following line to enable multiple
+	 * 			 timer interrupts.
+	 * */
+    // EAPP_SET_TIMER(TICK_CYCLE);
 }
 
 WEAK UINT32 HalTickStart()

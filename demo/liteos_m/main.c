@@ -19,8 +19,8 @@ INT32 LiteOS_main(VOID)
 
     ret = LOS_KernelInit();
 
-	  volatile int dummy_count = 1000;
-	  while (dummy_count) {dummy_count--;}
+    volatile int dummy_count = 10;
+    while (dummy_count) {dummy_count--;}
 
     EAPP_RETURN(ret);
 //     if (ret != LOS_OK) {
