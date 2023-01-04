@@ -47,9 +47,9 @@ void HandleTimerIRQ()
     csr_clear(CSR_SIP, SIP_STIP);
 
     /*
-	* Note(DD): uncomment the following line to enable multiple
-	* 			 timer interrupts.
-	* */
+     * Note(DD): uncomment the following line to enable multiple
+     * 			 timer interrupts.
+     * */
     // EAPP_SET_TIMER(TICK_CYCLE);
 }
 
