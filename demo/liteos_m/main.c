@@ -1,26 +1,8 @@
 #include "eapp.h"
 #include "print.h"
 #include "los_compiler.h"
-
-int prime_loop(int num)
-{
-  unsigned long count;
-  int i;
-  for(i = 2; i < num; i++)
-  {
-    if (num % i ==0)
-      count++;
-  }
-  return count;
-}
-
-int prime(unsigned long * args)
-{
-  eapp_print("%s is running\n", "Prime");
-  unsigned long ret;
-  ret = prime_loop(111);
-  EAPP_RETURN(ret);
-}
+#include "riscv_asm.h"
+#include "riscv_encoding.h"
 
 /*****************************************************************************
  Function    : main
@@ -33,9 +15,13 @@ INT32 LiteOS_main(VOID)
 {
     UINT32 ret;
 
-    printf("\n OHOS start \n\r");
+    eapp_print("\n OHOS start \n\r");
 
     ret = LOS_KernelInit();
+
+    volatile int dummy_count = 10;
+    while (dummy_count) {dummy_count--;}
+
     EAPP_RETURN(ret);
 //     if (ret != LOS_OK) {
 //         printf("Liteos kernel init failed! ERROR: 0x%x\n", ret);
@@ -53,10 +39,4 @@ INT32 LiteOS_main(VOID)
 //     while (1) {
 //         __asm volatile("wfi");
 //     }
-}
-
-int EAPP_ENTRY main(){
-  unsigned long * args;
-  EAPP_RESERVE_REG;
-  LiteOS_main();
 }

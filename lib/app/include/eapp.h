@@ -14,6 +14,7 @@
 /*      code & data    */
 /***********************/  /*0x1000*/
 
+void EAPP_SET_TIMER(unsigned long stime_value);
 void EAPP_RETURN(unsigned long rval) __attribute__((noreturn));
 unsigned long get_untrusted_mem_ptr(unsigned long * args){return args[12];}
 unsigned long get_untrusted_mem_size(unsigned long * args){return args[13];}

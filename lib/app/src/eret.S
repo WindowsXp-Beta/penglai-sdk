@@ -1,6 +1,7 @@
 #define SYS_eret 99 //ret to host
 #define SYS_ocall 98 //OCALL
 #define SYS_get_key 88
+#define SYS_set_timer 89 //enable next timer event
 
 .globl EAPP_RETURN
 EAPP_RETURN:
@@ -22,3 +23,10 @@ EAPP_GET_KEY:
     li a7, 0x100101 //SBI_EXT_PENGLAI_ENCLAVE
 	ecall
     ret
+
+.globl EAPP_SET_TIMER
+EAPP_SET_TIMER:
+	li a6, SYS_set_timer
+	li a7, 0x100101 //SBI_EXT_PENGLAI_ENCLAVE
+	ecall
+	ret

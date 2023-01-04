@@ -55,17 +55,16 @@
 #define RISCV_SSTATUS_SPP                   0x00000100
 
 /************************ sie ***************************/
-#define RISCV_SIE_USIE                      0x000000001
 #define RISCV_SIE_SSIE                      0x000000002
-#define RISCV_SIE_UTIE                      0x000000010
 #define RISCV_SIE_STIE                      0x000000020
-#define RISCV_SIE_UEIE                      0x000000100
 #define RISCV_SIE_SEIE                      0x000000200
 
+/************************ sip ***************************/
+#define RISCV_SIP_SSIP                      0x000000002
+#define RISCV_SIP_STIP                      0x000000020
+#define RISCV_SIP_SEIP                      0x000000200
+
 /************************** scause ***********************/
-#ifndef SCAUSE_INT_ID_MASK
-#define SCAUSE_INT_ID_MASK                  0x7FFFFFFFFFFFFFF
-#endif
 #define RISCV_SCAUSE_ECALL_U                8
 
 #define RISCV_USER_SOFT_IRQ                 0
@@ -74,7 +73,6 @@
 #define RISCV_SUPE_TIMER_IRQ                5
 #define RISCV_USER_EXT_IRQ                  8
 #define RISCV_SUPE_EXT_IRQ                  9
-
 
 #define READ_CSR(reg) ({                                          \
     UINT32 _tmp;                                                  \

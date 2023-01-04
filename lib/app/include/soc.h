@@ -18,25 +18,21 @@
 #include "soc_common.h"
 
 /*
- * Get the response interrupt number via mcause.
- * id = mcause & MCAUSE_INT_ID_MASK
+ * Get the response interrupt number via scause.
+ * id = scause & SCAUSE_INT_ID_MASK
  */
-#define MCAUSE_INT_ID_MASK                            0x7FFFFFF
-#define MSIP                                          0x2000000
-#define MTIMERCMP                                     0x2004000
-#define MTIMER                                        0x200BFF8
-#define CLOCK_CONTRAL_REG                             0x10008000
+#define SCAUSE_INT_ID_MASK                            0x7FFFFFFFFFFFFFF
 
 /* interrupt base addr : 0xc000000 + 4 * interrupt ID
  * [2:0]   priority
  * [31:3]  reserved
  */
-#define PLIC_PRIO_BASE                                 0xC000000
-#define PLIC_PEND_BASE                                 0xC001000 /* interrupt 0-31 */
-#define PLIC_PEND_REG2                                 0xC001004 /* interrupt 32-52 */.
-#define PLIC_ENABLE_BASE                               0xC002000 /* interrupt 0-31 */
-#define PLIC_ENABLE_REG2                               0xC002004 /* interrupt 32-52 */
-#define PLIC_REG_BASE                                  0xC200000
+// #define PLIC_PRIO_BASE                                 0xC000000
+// #define PLIC_PEND_BASE                                 0xC001000 /* interrupt 0-31 */
+// #define PLIC_PEND_REG2                                 0xC001004 /* interrupt 32-52 */.
+// #define PLIC_ENABLE_BASE                               0xC002000 /* interrupt 0-31 */
+// #define PLIC_ENABLE_REG2                               0xC002004 /* interrupt 32-52 */
+// #define PLIC_REG_BASE                                  0xC200000
 
 #define UART0_BASE                                     0x10000000
 
