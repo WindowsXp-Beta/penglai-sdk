@@ -30,5 +30,3 @@ EAPP_SET_TIMER:
 	li a7, 0x100101 //SBI_EXT_PENGLAI_ENCLAVE
 	ecall
 	ret
-
-

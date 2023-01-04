@@ -137,7 +137,6 @@ HalTrapEntry:
     PUSH_CALLEE_REG
     addi  sp, sp, -(4 * REGBYTES)
     sd    a0, 0 * REGBYTES(sp)
-    // FIXME(cyx): Why can't csrr stval?
     // csrr  t0, stval
     // sd    t0, 1 * REGBYTES(sp)
     csrr  t0, sedeleg
