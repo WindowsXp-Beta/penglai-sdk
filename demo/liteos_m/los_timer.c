@@ -55,7 +55,7 @@ void HandleTimerIRQ()
 
 WEAK UINT32 HalTickStart()
 {
-    unsigned int ret;
+    UINT32 ret;
 
     ret = HalHwiCreate(RISCV_SUPE_TIMER_IRQ, 0x1, 0, (HWI_PROC_FUNC)HandleTimerIRQ, 0);
     if (ret != LOS_OK) {
@@ -67,3 +67,29 @@ WEAK UINT32 HalTickStart()
 
     return LOS_OK;
 }
+
+WEAK VOID HalSysTickReload(UINT64 nextResponseTime)
+{
+    UINT64 timeMax = (UINT64)LOSCFG_BASE_CORE_TICK_RESPONSE_MAX - 1;
+
+    nextResponseTime = 
+        csr_read(time) + nextResponseTime > timeMax ? timeMax - csr_read(time) : nextResponseTime;
+
+    csr_clear(sie, RISCV_SIE_STIE);  // disable timer irq
+    EAPP_SET_TIMER(nextResponseTime);
+    csr_set(sie, RISCV_SIE_STIE);  // enable timer irq
+}
+
+WEAK UINT64 HalGetTickCycle(UINT32 *period)
+{
+    (VOID)period;
+    return csr_read(time);
+}
+
+UINT32 HalEnterSleep(VOID)
+{
+    wfi();
+
+    return LOS_OK;
+}
+
