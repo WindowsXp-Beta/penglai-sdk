@@ -29,7 +29,7 @@ extern "C" {
  * <ul><li>los_context.h: the header file that contains the API declaration.</li></ul>
  * @see None.
  */
-extern VOID *HalTskStackInit(UINT32 taskID, UINT32 stackSize, VOID *topStack);
+extern VOID *HalTskStackInit(UINT32 taskID, UINT64 stackSize, VOID *topStack);
 
 /**
  * @ingroup  los_context

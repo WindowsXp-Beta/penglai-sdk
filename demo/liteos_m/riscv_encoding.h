@@ -12,6 +12,8 @@
 
 #include "sbi_const.h"
 
+#define __riscv_xlen        64
+
 /* clang-format off */
 #define MSTATUS_SIE			_UL(0x00000002)
 #define MSTATUS_MIE			_UL(0x00000008)

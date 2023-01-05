@@ -74,7 +74,7 @@
     addi  sp, sp, 32 * REGBYTES
 .endm
 
-/*
+
 // not sure, see doc
 HalTaskContextSwitch:
     PUSH_ALL_REG
@@ -110,7 +110,7 @@ HalTaskContextSwitch:
 HalStartToRun:
     la   a1, g_losTask
     ld   a0, 8(a1)
-*/
+
 // retireve stack pointer
     ld      sp, TASK_CB_KERNEL_SP(a0)
 

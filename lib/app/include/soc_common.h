@@ -41,28 +41,26 @@
 
 /* task TCB offset */
 #define TASK_CB_KERNEL_SP       0x0
-#define TASK_CB_STATUS          0x4
+#define TASK_CB_STATUS          0x8
 
 #define UINT32_CUT_MASK         0xFFFFFFFF
 #define UINT8_CUT_MASK          0xFF
 #define OS_MV_32_BIT            32
 
-/************************ sstatus ************************/
-#define RISCV_SSTATUS_UIE                   0x00000001
-#define RISCV_SSTATUS_SIE                   0x00000002
-#define RISCV_SSTATUS_UPIE                  0x00000010
-#define RISCV_SSTATUS_SPIE                  0x00000020
-#define RISCV_SSTATUS_SPP                   0x00000100
+/**************************** sstatus ****************************/
+#define RISCV_SSTATUS_UIE                   0x0000000000000001LL
+#define RISCV_SSTATUS_SIE                   0x0000000000000002LL
+#define RISCV_SSTATUS_UPIE                  0x000000000000001CLL
+#define RISCV_SSTATUS_SPIE                  0x0000000000000020LL
+#define RISCV_SSTATUS_SPP                   0x0000000000000100LL
 
-/************************ sie ***************************/
-#define RISCV_SIE_SSIE                      0x000000002
-#define RISCV_SIE_STIE                      0x000000020
-#define RISCV_SIE_SEIE                      0x000000200
-
-/************************ sip ***************************/
-#define RISCV_SIP_SSIP                      0x000000002
-#define RISCV_SIP_STIP                      0x000000020
-#define RISCV_SIP_SEIP                      0x000000200
+/**************************** sie *******************************/
+#define RISCV_SIE_USIE                      0x0000000000000001LL
+#define RISCV_SIE_SSIE                      0x0000000000000002LL
+#define RISCV_SIE_UTIE                      0x000000000000001CLL
+#define RISCV_SIE_STIE                      0x0000000000000020LL
+#define RISCV_SIE_UEIE                      0x00000000000001C0LL
+#define RISCV_SIE_SEIE                      0x0000000000000200LL
 
 /************************** scause ***********************/
 #define RISCV_SCAUSE_ECALL_U                8
@@ -75,7 +73,7 @@
 #define RISCV_SUPE_EXT_IRQ                  9
 
 #define READ_CSR(reg) ({                                          \
-    UINT32 _tmp;                                                  \
+    UINT64 _tmp;                                                  \
     __asm__ volatile("csrr %0, " #reg : "=r"(_tmp) : : "memory"); \
     _tmp;                                                         \
 })

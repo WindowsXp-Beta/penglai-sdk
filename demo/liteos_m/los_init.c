@@ -2,6 +2,7 @@
 #include "los_task.h"
 #include "los_memory.h"
 #include "los_context.h"
+#include "los_arch.h"
 #include "target_config.h"
 #include "print.h"
 
@@ -14,10 +15,13 @@
  *****************************************************************************/
 LITE_OS_SEC_TEXT_INIT static VOID OsRegister(VOID)
 {
-    // TODO(zhidong): remove comment after los_task.c is ported
-    // g_taskMaxNum = LOSCFG_BASE_CORE_TSK_LIMIT + 1; /* Reserved 1 for IDLE */
-
+    g_taskMaxNum = LOSCFG_BASE_CORE_TSK_LIMIT + 1; /* Reserved 1 for IDLE */
     return;
+}
+
+LITE_OS_SEC_TEXT_INIT UINT32 LOS_Start(VOID)
+{
+    return HalStartSchedule();
 }
 
 LITE_OS_SEC_TEXT_INIT VOID LOS_Panic(const CHAR *fmt, ...)
@@ -50,16 +54,16 @@ UINT32 LOS_KernelInit(VOID)
 
     HalArchInit();
 
-    // ret = OsTaskInit();
-    // if (ret != LOS_OK) {
-    //     PRINT_ERR("OsTaskInit error\n");
-    //     return ret;
-    // }
+    ret = OsTaskInit();
+    if (ret != LOS_OK) {
+        PRINT_ERR("OsTaskInit error\n");
+        return ret;
+    }
 
-    // ret = OsIdleTaskCreate();
-    // if (ret != LOS_OK) {
-    //     return ret;
-    // }
+    ret = OsIdleTaskCreate();
+    if (ret != LOS_OK) {
+        return ret;
+    }
 
     return LOS_OK;
 }

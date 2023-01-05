@@ -1,7 +1,7 @@
+#include "los_task.h"
 #include "los_memory.h"
 #include "los_interrupt.h"
-
-STATIC UINT8 g_memStart[LOSCFG_SYS_HEAP_SIZE];
+#include "string.h"
 
 /* Used to cut non-essential functions. */
 #define OS_MEM_EXPAND_ENABLE    0

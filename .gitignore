@@ -2,3 +2,11 @@ tags
 *.o
 *.dump
 source.sh
+
+docker_cmd.sh
+fw_payload.elf
+openEuler-preview.riscv64.qcow2
+run_openeuler_gdb.sh
+
+.vscode/
+.gdbinit
