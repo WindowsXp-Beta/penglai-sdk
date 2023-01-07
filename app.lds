@@ -20,11 +20,9 @@ SECTIONS
   . = ALIGN(0x1000);
   .brk_area :
   {
-    __heap_start = .;
     __brk_start0 = .;
     . = . + 4096 * 64;
     __brk_end = .;
-    __heap_size = . - __heap_start;
   }
 
   . = ALIGN(0x1000);

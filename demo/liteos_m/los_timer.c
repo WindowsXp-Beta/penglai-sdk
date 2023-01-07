@@ -67,8 +67,8 @@ WEAK UINT32 HalTickStart()
     PRINT_INFO("After HalHwiCreate\n");
 
     csr_set(CSR_SIE, SIP_STIP);
-    PRINT_INFO("After csr_set\n");
 
+    PRINT_INFO("Before EAPP_SET_TIMER\n");
     EAPP_SET_TIMER(TICK_CYCLE);
     PRINT_INFO("After EAPP_SET_TIMER\n");
 
