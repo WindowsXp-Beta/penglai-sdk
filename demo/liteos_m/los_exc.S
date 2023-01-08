@@ -139,8 +139,8 @@ HalTrapEntry:
     sd    a0, 0 * REGBYTES(sp)
     // csrr  t0, stval
     // sd    t0, 1 * REGBYTES(sp)
-    csrr  t0, sedeleg
-    sd    t0, 2 * REGBYTES(sp)
+    // csrr  t0, sedeleg
+    //sd    t0, 2 * REGBYTES(sp)
     sd    gp, 3 * REGBYTES(sp)
     mv    a0, sp
     csrw  sscratch, sp

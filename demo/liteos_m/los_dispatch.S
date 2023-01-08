@@ -75,6 +75,7 @@
 .endm
 
 
+.section .text
 // not sure, see doc
 HalTaskContextSwitch:
     PUSH_ALL_REG
@@ -119,7 +120,7 @@ HalStartToRun:
     csrw    sstatus, t0
 
 // retrieve the address at which exception happened
-    lw      t0, 17 * REGBYTES(sp)
+    ld      t0, 17 * REGBYTES(sp)
     csrw    sepc, t0
 
 // retrieve the registers
@@ -127,7 +128,6 @@ HalStartToRun:
 
     sret
 
-.section .text
 HalDisableIRQ:
     li      t0, (RISCV_SSTATUS_SPIE | RISCV_SSTATUS_SIE) // spie | sie
     csrrc   zero, sstatus, t0

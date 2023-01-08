@@ -39,12 +39,12 @@
 #include "print.h"
 
 #ifndef TICK_CYCLE
-#define TICK_CYCLE 1000000000
+#define TICK_CYCLE 4000000000
 #endif
 
 void HandleTimerIRQ()
 {
-    // eapp_print("\n Timer IRQ! \n\r");
+    eapp_print("\n Timer IRQ! \n\r");
     csr_clear(CSR_SIP, SIP_STIP);
 
     OsTickHandler();
@@ -79,7 +79,7 @@ WEAK VOID HalSysTickReload(UINT64 nextResponseTime)
 {
     UINT64 timeMax = (UINT64)LOSCFG_BASE_CORE_TICK_RESPONSE_MAX - 1;
 
-    nextResponseTime = 
+    nextResponseTime =
         csr_read(time) + nextResponseTime > timeMax ? timeMax - csr_read(time) : nextResponseTime;
 
     csr_clear(sie, RISCV_SIE_STIE);  // disable timer irq
@@ -95,7 +95,8 @@ WEAK UINT64 HalGetTickCycle(UINT32 *period)
 
 UINT32 HalEnterSleep(VOID)
 {
-    wfi();
+    // wfi();
+    __asm volatile("wfi");
 
     return LOS_OK;
 }

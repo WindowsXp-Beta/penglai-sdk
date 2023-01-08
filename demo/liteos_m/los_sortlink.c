@@ -157,14 +157,15 @@ UINT64 OsGetNextExpireTime(UINT64 startTime)
 {
     UINT32 intSave;
     SortLinkAttribute *taskHeader = &g_taskSortLink;
-    SortLinkAttribute *swtmrHeader = &g_swtmrSortLink;
+    // SortLinkAttribute *swtmrHeader = &g_swtmrSortLink;
 
     intSave = LOS_IntLock();
     UINT64 taskExpirTime = OsGetSortLinkNextExpireTime(taskHeader, startTime);
-    UINT64 swtmrExpirTime = OsGetSortLinkNextExpireTime(swtmrHeader, startTime);
+    // UINT64 swtmrExpirTime = OsGetSortLinkNextExpireTime(swtmrHeader, startTime);
     LOS_IntRestore(intSave);
 
-    return (taskExpirTime < swtmrExpirTime) ? taskExpirTime : swtmrExpirTime;
+    return taskExpirTime;
+    // return (taskExpirTime < swtmrExpirTime) ? taskExpirTime : swtmrExpirTime;
 }
 
 UINT32 OsSortLinkGetTargetExpireTime(UINT64 currTime, const SortLinkList *targetSortList)
