@@ -168,7 +168,7 @@ LITE_OS_SEC_TEXT UINT32 HalHwiCreate(HWI_HANDLE_T hwiNum,
                                       HWI_PROC_FUNC hwiHandler,
                                       HWI_ARG_T irqParam)
 {
-    UINT32 intSave;
+    UINT64 intSave;
 
     if (hwiHandler == NULL) {
         return OS_ERRNO_HWI_PROC_FUNC_NULL;
@@ -206,7 +206,7 @@ LITE_OS_SEC_TEXT UINT32 HalHwiCreate(HWI_HANDLE_T hwiNum,
  *****************************************************************************/
 LITE_OS_SEC_TEXT UINT32 HalHwiDelete(HWI_HANDLE_T hwiNum)
 {
-    UINT32 intSave;
+    UINT64 intSave;
 
     if (hwiNum >= OS_HWI_MAX_NUM) {
         return OS_ERRNO_HWI_NUM_INVALID;

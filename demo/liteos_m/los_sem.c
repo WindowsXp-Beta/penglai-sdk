@@ -84,7 +84,7 @@ LITE_OS_SEC_TEXT_INIT UINT32 OsSemInit(VOID)
  *****************************************************************************/
 LITE_OS_SEC_TEXT_INIT UINT32 OsSemCreate(UINT16 count, UINT16 maxCount, UINT32 *semHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosSemCB *semCreated = NULL;
     LOS_DL_LIST *unusedSem = NULL;
     UINT32 errNo;
@@ -153,7 +153,7 @@ LITE_OS_SEC_TEXT_INIT UINT32 LOS_BinarySemCreate(UINT16 count, UINT32 *semHandle
  *****************************************************************************/
 LITE_OS_SEC_TEXT_INIT UINT32 LOS_SemDelete(UINT32 semHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosSemCB *semDeleted = NULL;
     UINT32 errNo;
     UINT32 errLine;
@@ -211,7 +211,7 @@ STATIC_INLINE UINT32 OsSemValidCheck(LosSemCB *semPended)
  *****************************************************************************/
 LITE_OS_SEC_TEXT UINT32 LOS_SemPend(UINT32 semHandle, UINT32 timeout)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosSemCB *semPended = NULL;
     UINT32 retErr;
     LosTaskCB *runningTask = NULL;
@@ -270,7 +270,7 @@ ERROR_SEM_PEND:
  *****************************************************************************/
 LITE_OS_SEC_TEXT UINT32 LOS_SemPost(UINT32 semHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosSemCB *semPosted = GET_SEM(semHandle);
     LosTaskCB *resumedTask = NULL;
 

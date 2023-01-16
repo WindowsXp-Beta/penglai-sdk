@@ -560,7 +560,7 @@ BOOL OsSchedTaskSwitch(VOID)
 
 UINT64 LOS_SchedTickTimeoutNsGet(VOID)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     UINT64 responseTime;
     UINT64 currTime;
 

@@ -46,7 +46,7 @@ unsigned int LosAppInit(VOID)
         eapp_print("Create Task failed! ERROR: 0x%x\n", ret);
     }
 
-    eapp_print("Task created! taskID1 = %u, taskID2 = %u\n", taskID1, taskID2);
+    eapp_print("Task created! taskID1 = %d, taskID2 = %d\n", taskID1, taskID2);
 
     return ret;
 }

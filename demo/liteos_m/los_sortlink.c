@@ -103,7 +103,7 @@ STATIC INLINE UINT64 OsGetSortLinkNextExpireTime(SortLinkAttribute *sortHeader, 
 
 VOID OsAdd2SortLink(SortLinkList *node, UINT64 startTime, UINT32 waitTicks, SortLinkType type)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     SortLinkAttribute *sortLinkHeader = NULL;
 
     if (type == OS_SORT_LINK_TASK) {
@@ -122,7 +122,7 @@ VOID OsAdd2SortLink(SortLinkList *node, UINT64 startTime, UINT32 waitTicks, Sort
 
 VOID OsDeleteSortLink(SortLinkList *node, SortLinkType type)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     SortLinkAttribute *sortLinkHeader = NULL;
 
     if (type == OS_SORT_LINK_TASK) {
@@ -155,7 +155,7 @@ SortLinkAttribute *OsGetSortLinkAttribute(SortLinkType type)
 
 UINT64 OsGetNextExpireTime(UINT64 startTime)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     SortLinkAttribute *taskHeader = &g_taskSortLink;
     SortLinkAttribute *swtmrHeader = &g_swtmrSortLink;
 

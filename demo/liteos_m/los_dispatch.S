@@ -119,7 +119,7 @@ HalStartToRun:
     csrw    sstatus, t0
 
 // retrieve the address at which exception happened
-    lw      t0, 17 * REGBYTES(sp)
+    ld      t0, 17 * REGBYTES(sp)
     csrw    sepc, t0
 
 // retrieve the registers

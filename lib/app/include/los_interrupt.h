@@ -76,7 +76,7 @@ UINT32 HalIsIntActive(VOID);
 UINT32 HalIntLock(VOID);
 #define LOS_IntLock HalIntLock
 
-VOID HalIntRestore(UINT32 intSave);
+VOID HalIntRestore(UINT64 intSave);
 #define LOS_IntRestore HalIntRestore
 
 UINT32 HalIntUnLock(VOID);

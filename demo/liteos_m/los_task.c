@@ -400,7 +400,6 @@ LITE_OS_SEC_TEXT_INIT UINT32 OsTaskInit(VOID)
     g_losTask.runTask->priority = OS_TASK_PRIORITY_LOWEST + 1;
 
     g_idleTaskID = OS_INVALID;
-    PRINT_INFO("Before LiteOS SchedInit\n");
     return OsSchedInit();
 }
 
@@ -428,7 +427,6 @@ LITE_OS_SEC_TEXT_INIT UINT32 OsIdleTaskCreate(VOID)
     }
 
     OsSchedSetIdleTaskSchedParam(OS_TCB_FROM_TID(g_idleTaskID));
-    PRINT_INFO("LiteOS IdleTask created! TaskId = %d\n", g_idleTaskID);
     return LOS_OK;
 }
 

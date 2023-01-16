@@ -39,7 +39,7 @@
 #include "print.h"
 
 #ifndef TICK_CYCLE
-#define TICK_CYCLE 1000000000
+#define TICK_CYCLE 6000000000
 #endif
 
 void HandleTimerIRQ()
@@ -64,13 +64,9 @@ WEAK UINT32 HalTickStart()
     if (ret != LOS_OK) {
         return ret;
     }
-    PRINT_INFO("After HalHwiCreate\n");
 
     csr_set(CSR_SIE, SIP_STIP);
-
-    PRINT_INFO("Before EAPP_SET_TIMER\n");
     EAPP_SET_TIMER(TICK_CYCLE);
-    PRINT_INFO("After EAPP_SET_TIMER\n");
 
     return LOS_OK;
 }

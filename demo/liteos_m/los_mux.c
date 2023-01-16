@@ -82,7 +82,7 @@ LITE_OS_SEC_TEXT_INIT UINT32 OsMuxInit(VOID)
  *****************************************************************************/
 LITE_OS_SEC_TEXT_INIT UINT32 LOS_MuxCreate(UINT32 *muxHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosMuxCB *muxCreated = NULL;
     LOS_DL_LIST *unusedMux = NULL;
     UINT32 errNo;
@@ -122,7 +122,7 @@ ERR_HANDLER:
  *****************************************************************************/
 LITE_OS_SEC_TEXT_INIT UINT32 LOS_MuxDelete(UINT32 muxHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosMuxCB *muxDeleted = NULL;
     UINT32 errNo;
     UINT32 errLine;
@@ -181,7 +181,7 @@ STATIC_INLINE UINT32 OsMuxValidCheck(LosMuxCB *muxPended)
  *****************************************************************************/
 LITE_OS_SEC_TEXT UINT32 LOS_MuxPend(UINT32 muxHandle, UINT32 timeout)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosMuxCB *muxPended = NULL;
     UINT32 retErr;
     LosTaskCB *runningTask = NULL;
@@ -255,7 +255,7 @@ ERROR_MUX_PEND:
  *****************************************************************************/
 LITE_OS_SEC_TEXT UINT32 LOS_MuxPost(UINT32 muxHandle)
 {
-    UINT32 intSave;
+    UINT64 intSave;
     LosMuxCB *muxPosted = GET_MUX(muxHandle);
     LosTaskCB *resumedTask = NULL;
     LosTaskCB *runningTask = NULL;
