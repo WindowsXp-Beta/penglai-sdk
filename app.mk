@@ -1,5 +1,5 @@
 CC = riscv64-unknown-linux-gnu-gcc
-CFLAGS = -Wall -Og
+CFLAGS = -Wall -O0 -g
 LINK = riscv64-unknown-linux-gnu-ld
 AS = riscv64-unknown-linux-gnu-as
 

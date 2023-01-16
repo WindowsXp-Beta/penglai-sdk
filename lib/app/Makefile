@@ -1,5 +1,5 @@
 CC = riscv64-unknown-linux-gnu-gcc
-CFLAGS = -Wall -shared -fPIC
+CFLAGS = -Wall -shared -fPIC -g
 LINK = riscv64-unknown-linux-gnu-ld
 LINKFLAGS = -static
 INCLUDE_DIR = include

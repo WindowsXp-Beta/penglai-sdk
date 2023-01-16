@@ -9,7 +9,7 @@ static void TaskSampleEntry2(void)
 {
     while(1) {
         eapp_print("TaskSampleEntry2 running...\n\r");
-        LOS_TaskDelay(1000);
+        LOS_TaskDelay(10);
     }
 }
 
@@ -18,7 +18,7 @@ static void TaskSampleEntry1(void)
 {
     while(1) {
         eapp_print("TaskSampleEntry1 running...\n\r");
-        LOS_TaskDelay(1000);
+        LOS_TaskDelay(10);
     }
 }
 
@@ -87,6 +87,6 @@ START_FAILED:
     while (1) {
         __asm volatile("wfi");
     }
-    
+
     EAPP_RETURN(ret);
 }

@@ -75,6 +75,7 @@
 .endm
 
 
+.section .text
 // not sure, see doc
 HalTaskContextSwitch:
     PUSH_ALL_REG
@@ -127,7 +128,6 @@ HalStartToRun:
 
     sret
 
-.section .text
 HalDisableIRQ:
     li      t0, (RISCV_SSTATUS_SPIE | RISCV_SSTATUS_SIE) // spie | sie
     csrrc   zero, sstatus, t0
